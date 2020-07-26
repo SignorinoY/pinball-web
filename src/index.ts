@@ -6,9 +6,13 @@ import { GameScene } from './scenes/GameScene'
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
-    width: 640,
-    height: 960,
-    parent: 'app',
+    scale: {
+        mode: Phaser.Scale.FIT,
+        parent: 'app',
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 640,
+        height: 960
+    },
     scene: [BootScene, MainScene, GameScene],
     physics: {
         default: 'matter',
