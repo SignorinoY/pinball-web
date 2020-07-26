@@ -1,0 +1,53 @@
+{
+    "preload": {
+        "files": [
+            
+            {
+                "type": "bitmapFont",
+                "key": "gem",
+                "textureURL": "assets/fonts/gem.png",
+                "fontDataURL": "assets/fonts/gem.xml"
+            },
+            {
+                "type": "image",
+                "key": "background",
+                "url": "assets/images/background.png"
+            },
+            {
+                "type": "image",
+                "key": "start-button",
+                "url": "assets/images/start_button.png"
+            },
+            {
+                "type": "image",
+                "key": "logo",
+                "url": "assets/images/logo.png"
+            },
+            {
+                "type": "image",
+                "key": "title",
+                "url": "assets/images/title.png"
+            },
+            {
+                "type": "image",
+                "key": "player",
+                "url": "assets/images/player.png"
+            },
+            {
+                "type": "image",
+                "key": "player-disk",
+                "url": "assets/images/player_disk.png"
+            },
+            {
+                "type": "image",
+                "key": "player-arrow",
+                "url": "assets/images/player_arrow.png"
+            },
+            {
+                "type": "image",
+                "key": "wall",
+                "url": "assets/images/wall.png"
+            }
+        ]
+    }
+}

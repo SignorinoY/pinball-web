@@ -1,0 +1,31 @@
+{
+    "name": "pinball",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start": "parcel src/index.html -p 8000",
+        "build": "parcel build src/index.html --out-dir dist --public-url ./"
+    },
+    "author": "SignorinoY",
+    "license": "MIT",
+    "devDependencies": {
+        "cssnano": "^4.1.10",
+        "parcel-plugin-clean-easy": "^1.0.2",
+        "parcel-plugin-static-files-copy": "^2.4.3",
+        "typescript": "^3.9.7"
+    },
+    "dependencies": {
+        "phaser": "^3.24.1"
+    },
+    "parcelCleanPaths": [
+        "dist"
+    ],
+    "staticFiles": {
+        "staticPath": [
+            {
+                "staticPath": "src/assets",
+                "staticOutDir": "assets"
+            }
+        ]
+    }
+}
