@@ -29,6 +29,33 @@ export class GameScene extends Phaser.Scene {
             this.enemies.push(new Enemy(this.matter.world, config['x'], config['y'], config['radius'], config['reward']));
         })
 
+        this.player
+            .on('dragstart', () => {
+                this.chance -= 1;
+                this.chance_text.text = 'Chance:' + this.chance;
+                this.player.onDragStart();
+            })
+            .on('drag', (pointer) => {
+                this.player.onDrag(pointer.x, pointer.y);
+            })
+            .on('dragend', (pointer) => {
+                this.player.onDragEnd(pointer.x, pointer.y);
+            });
+
+        this.matter.world.on('collisionstart', function (event) {
+            const pair = event.pairs[0];
+            if (pair.bodyA.label === 'player' && pair.bodyB.label === 'enemy') {
+                for (let i = 0; i < this.enemies.length; i++) {
+                    const element = this.enemies[i];
+                    if (element.body.id === pair.bodyB.id) {
+                        this.score += element.onCollide();
+                        this.score_text.text = 'Score:' + this.score;
+                        this.enemies.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }, this);
     }
 
     update(): void {

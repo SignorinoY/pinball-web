@@ -2,16 +2,15 @@ export class Player extends Phaser.Physics.Matter.Image {
 
     // public animation: Phaser.Tweens.Tween;
     // public player: Phaser.Physics.Matter.Image;
+    public scene: Phaser.Scene;
     public disk: Phaser.GameObjects.Image;
     public arrow: Phaser.GameObjects.Image;
 
     constructor(world: Phaser.Physics.Matter.World, x: number, y: number, scene: Phaser.Scene) {
 
         super(world, x, y, 'player');
+        this.scene = scene;
 
-
-        // this._scene = scene;
-        // this.player = this._scene.matter.add.image(x, y, 'player');
         this.disk = scene.add.image(x, y, 'player-disk').setVisible(false);
         this.arrow = scene.add.image(x, y, 'player-arrow').setOrigin(0, 0.5).setVisible(false);
         // 物体形状
@@ -29,17 +28,9 @@ export class Player extends Phaser.Physics.Matter.Image {
         // });
         // 可交互性
         this.setInteractive({ draggable: true });
-        this
-            .on('dragstart', () => {
-                this.onDragStart();
-            })
-            .on('drag', (pointer) => {
-                this.onDrag(pointer.x, pointer.y);
-            })
-            .on('dragend', (pointer) => {
-                this.onDragEnd(pointer.x, pointer.y);
-            });
+
         world.scene.add.existing(this)
+        
     }
 
     onDragStart(): void {
