@@ -47,6 +47,11 @@
                 "type": "image",
                 "key": "wall",
                 "url": "assets/images/wall.png"
+            },
+            {
+                "type": "image",
+                "key": "batman",
+                "url": "assets/images/batman.png"
             }
         ]
     }
