@@ -5,10 +5,14 @@ import { Enemy } from '../objects/Enemy';
 export class GameScene extends Phaser.Scene {
 
     private background: Phaser.GameObjects.Image;
-    private score: Phaser.GameObjects.BitmapText;
+    private score_text: Phaser.GameObjects.BitmapText;
+    private chance_text: Phaser.GameObjects.BitmapText;
     private player: Player;
     private obstacles: Array<Obstacle> = [];
     private enemies: Array<Enemy> = [];
+
+    private score: number = 0;
+    private chance: number;
 
     constructor() {
         super({ key: 'GameScene' })
@@ -17,8 +21,11 @@ export class GameScene extends Phaser.Scene {
     create(): void {
         this.matter.world.setBounds(0, 50, 640, 910);
 
+        this.chance = 5;
+
         this.background = this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
-        this.score = this.add.bitmapText(440, 10, 'gem', 'Score:100', 32)
+        this.score_text = this.add.bitmapText(480, 10, 'gem', 'Score:' + this.score, 32)
+        this.chance_text = this.add.bitmapText(320, 10, 'gem', 'Chance:' + this.chance, 32)
 
         this.player = new Player(this.matter.world, 320, 100, this);
 
