@@ -66,5 +66,8 @@ export class GameScene extends Phaser.Scene {
     }
 
     update(): void {
+        if (this.enemies.length === 0 || this.chance === 0) {
+            this.scene.start("OverScene")
+        }
     }
 }
