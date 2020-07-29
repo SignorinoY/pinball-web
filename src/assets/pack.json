@@ -1,7 +1,6 @@
 {
     "preload": {
         "files": [
-            
             {
                 "type": "bitmapFont",
                 "key": "gem",
