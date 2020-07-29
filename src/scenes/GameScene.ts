@@ -38,23 +38,22 @@ export class GameScene extends Phaser.Scene {
 
         this.player
             .on('dragstart', () => {
-                this.chance -= 1;
-                this.chance_text.text = 'Chance:' + this.chance;
                 this.player.onDragStart();
             })
             .on('drag', (pointer) => {
                 this.player.onDrag(pointer.x, pointer.y);
             })
             .on('dragend', (pointer) => {
+                this.chance_text.text = 'Chance:' + --this.chance;
                 this.player.onDragEnd(pointer.x, pointer.y);
             });
 
         this.matter.world.on('collisionstart', function (event) {
             const pair = event.pairs[0];
-            if (pair.bodyA.label === 'player' && pair.bodyB.label === 'enemy') {
+            if (pair.bodyA.label == 'player' && pair.bodyB.label == 'enemy') {
                 for (let i = 0; i < this.enemies.length; i++) {
                     const element = this.enemies[i];
-                    if (element.body.id === pair.bodyB.id) {
+                    if (element.body.id == pair.bodyB.id) {
                         this.score += element.onCollide();
                         this.score_text.text = 'Score:' + this.score;
                         this.enemies.splice(i, 1);
@@ -66,7 +65,8 @@ export class GameScene extends Phaser.Scene {
     }
 
     update(): void {
-        if (this.enemies.length === 0 || this.chance === 0) {
+        const speed = Math.sqrt(Math.pow(this.player.body.velocity.x, 2) + Math.pow(this.player.body.velocity.y, 2));
+        if ((this.enemies.length == 0 || this.chance == 0) && speed <= 0.5) {
             this.scene.start("OverScene")
         }
     }
