@@ -16,7 +16,9 @@
     },
     "dependencies": {
         "cookiejs": "^1.0.26",
-        "phaser": "^3.24.1"
+        "phaser": "^3.24.1",
+        "superagent": "^5.3.1",
+        "weixin-js-sdk": "^1.6.0"
     },
     "parcelCleanPaths": [
         "dist"

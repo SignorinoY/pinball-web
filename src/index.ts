@@ -1,5 +1,8 @@
-import Phaser = require('phaser');
 import cookie from 'cookiejs';
+
+import request = require('superagent');
+import wx = require('weixin-js-sdk');
+import Phaser = require('phaser');
 
 import { BootScene } from './scenes/BootScene'
 import { MainScene } from './scenes/MainScene'
@@ -50,3 +53,31 @@ if (user == null && cookie("openid") == "") {
     // 已进行授权
     const game = new Phaser.Game(config);
 }
+
+// 微信菜单页面定制化链接分享
+request
+    .post('https://xwfintech.qingke.io/openapi/wechat/signature')
+    .send({ url: location.href })
+    .end(function (error, result) {
+        wx.config({
+            debug: false,
+            appId: result.body.jssdk.appid,
+            timestamp: result.body.jssdk.timestamp,
+            nonceStr: result.body.jssdk.noncestr,
+            signature: result.body.jssdk.signature,
+            jsApiList: result.body.jssdk.jsApiList
+        });
+        wx.ready(function () {
+            wx.onMenuShareAppMessage({
+                title: '新网银行金融科技挑战赛·Pinball BY SignorinoY',
+                link: 'https://xwfintech.qingke.io/5ef21525813260002d508321/',
+                imgUrl: 'https://xwfintech.qingke.io/5ef21525813260002d508321/assets/images/share.png'
+            });
+            wx.onMenuShareTimeline({
+                title: '新网银行金融科技挑战赛·Pinball BY SignorinoY',
+                link: 'https://xwfintech.qingke.io/5ef21525813260002d508321/',
+                imgUrl: 'https://xwfintech.qingke.io/5ef21525813260002d508321/assets/images/share.png'
+            });
+        })
+    });
+
