@@ -1,7 +1,8 @@
 import cookie from 'cookiejs';
+import wx from 'weixin-jsapi';
 
+import sha1 from 'crypto-js/sha1';
 import request = require('superagent');
-import wx = require('weixin-js-sdk');
 import Phaser = require('phaser');
 
 import { BootScene } from './scenes/BootScene'
@@ -56,28 +57,54 @@ if (user == null && cookie("openid") == "") {
 
 // 微信菜单页面定制化链接分享
 request
-    .post('https://xwfintech.qingke.io/openapi/wechat/signature')
-    .send({ url: location.href })
+    .get('https://xwfintech.qingke.io/wxapi/cgi-bin/token')
     .end(function (error, result) {
+        const appId = 'wx0703b2844c4a2143';
+        const jsapi_ticket = result.body['ticket'];
+        const timestamp = Math.round(new Date().getTime() / 1000);
+        const nonceStr = Math.random().toString(36).substr(2, 15);
+        const url = location.href.split('#')[0];
+        const string1 = 'jsapi_ticket=' + jsapi_ticket + '&noncestr=' + nonceStr + '&timestamp=' + timestamp + '&url=' + url;
+        const signature = sha1(string1).toString();
         wx.config({
             debug: false,
-            appId: result.body.jssdk.appid,
-            timestamp: result.body.jssdk.timestamp,
-            nonceStr: result.body.jssdk.noncestr,
-            signature: result.body.jssdk.signature,
-            jsApiList: result.body.jssdk.jsApiList
+            appId: appId,
+            timestamp: timestamp,
+            nonceStr: nonceStr,
+            signature: signature,
+            jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ']
         });
         wx.ready(function () {
-            wx.onMenuShareAppMessage({
-                title: '新网银行金融科技挑战赛·Pinball BY SignorinoY',
-                link: 'https://xwfintech.qingke.io/5ef21525813260002d508321/',
-                imgUrl: 'https://xwfintech.qingke.io/5ef21525813260002d508321/assets/images/share.png'
-            });
+            const share_title = '新网银行金融科技挑战赛·Pinball BY SignorinoY';
+            const share_desc = '朱望仔大战大反派，快来打榜挑战吧~😀';
+            const share_link = 'https://xwfintech.qingke.io/5ef21525813260002d508321/';
+            const share_banner = 'https://xwfintech.qingke.io/5ef21525813260002d508321/assets/images/share.png';
             wx.onMenuShareTimeline({
-                title: '新网银行金融科技挑战赛·Pinball BY SignorinoY',
-                link: 'https://xwfintech.qingke.io/5ef21525813260002d508321/',
-                imgUrl: 'https://xwfintech.qingke.io/5ef21525813260002d508321/assets/images/share.png'
+                title: share_title,
+                link: share_link,
+                imgUrl: share_banner,
+                success: () => { },
+                cancel: () => { }
             });
-        })
-    });
-
+            wx.onMenuShareAppMessage({
+                title: share_title,
+                desc: share_desc,
+                link: share_link,
+                imgUrl: share_banner,
+                type: '',
+                dataUrl: '',
+                success: () => { },
+                cancel: () => { }
+            });
+            wx.onMenuShareQQ({
+                title: share_title,
+                desc: share_desc,
+                link: share_link,
+                imgUrl: share_banner,
+                type: '',
+                dataUrl: '',
+                success: () => { },
+                cancel: () => { }
+            });
+        });
+    })
