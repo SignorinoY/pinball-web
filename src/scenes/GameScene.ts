@@ -75,7 +75,7 @@ export class GameScene extends Phaser.Scene {
                 .post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/score')
                 .send({ 'openid': cookie.get('openid'), 'score': this.score })
                 .end((error) => { console.log(error) });
-            this.scene.start("OverScene");
+            this.scene.start("OverScene", { score: this.score });
         }
     }
 }
