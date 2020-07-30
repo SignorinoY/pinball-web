@@ -80,7 +80,7 @@ request
             jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ']
         });
         wx.ready(function () {
-            const share_title = '新网银行金融科技挑战赛·Pinball BY SignorinoY';
+            const share_title = '新网银行金融科技挑战赛·Pinball By SignorinoY';
             const share_desc = '朱望仔大战大反派，快来打榜挑战吧~😀';
             const share_link = 'https://xwfintech.qingke.io/5ef21525813260002d508321/';
             const share_banner = 'https://xwfintech.qingke.io/5ef21525813260002d508321/assets/images/share.png';
