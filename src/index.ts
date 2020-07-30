@@ -49,6 +49,11 @@ if (user == null && cookie("openid") == "") {
     // 微信授权成功
     // 将微信用户 openid 存入 cookie
     cookie.set("openid", user["openid"], 7);
+    // 将微信用户数据存入数据库
+    request
+        .post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/user')
+        .send(user)
+        .end((error) => { console.log(error) });
     const game = new Phaser.Game(config);
 } else {
     // 已进行授权
