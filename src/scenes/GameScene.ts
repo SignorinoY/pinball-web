@@ -36,7 +36,7 @@ export class GameScene extends Phaser.Scene {
         [{ 'p1': [100, 300], 'p2': [500, 300] }].forEach(obstacle_config => {
             this.obstacles.push(new Obstacle(this.matter.world, obstacle_config['p1'], obstacle_config['p2']));
         });
-        [{ 'x': 100, 'y': 100, 'radius': 50, 'reward': 100 }, { 'x': 100, 'y': 500, 'radius': 50, 'reward': 10 }].forEach(config => {
+        [{ 'x': 100, 'y': 100, 'radius': 50, 'reward': 10 }, { 'x': 100, 'y': 500, 'radius': 50, 'reward': 10 }, { 'x': 500, 'y': 500, 'radius': 50, 'reward': 10 }, { 'x': 400, 'y': 300, 'radius': 50, 'reward': 10 }].forEach(config => {
             this.enemies.push(new Enemy(this.matter.world, config['x'], config['y'], config['radius'], config['reward']));
         })
 
