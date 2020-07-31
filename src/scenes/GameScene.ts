@@ -76,7 +76,7 @@ export class GameScene extends Phaser.Scene {
             request
                 .post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/score')
                 .send({ 'openid': openid != false ? openid : 'Unknown', 'score': this.score })
-                .end((error) => { console.log(error) });
+                .end();
             this.scene.start("OverScene", { score: this.score });
         }
     }

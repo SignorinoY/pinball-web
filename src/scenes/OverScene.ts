@@ -29,7 +29,6 @@ export class OverScene extends Phaser.Scene {
 
         this.replay_button = this.add.bitmapText(320, 560, 'gem', 'Replay', 48);
 
-        console.log((640 - this.replay_button.width) / 2)
         this.replay_button.setX((640 - this.replay_button.width) / 2).setDisplayOrigin(0.5, 0.5)
         this.replay_button.setInteractive();
         this.replay_button.on('pointerup', () => {

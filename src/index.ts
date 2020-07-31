@@ -33,10 +33,7 @@ if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
         // 将微信用户 openid 存入 cookie
         cookie.set("openid", user["openid"], 7);
         // 将微信用户数据存入数据库
-        request
-            .post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/user')
-            .send(user)
-            .end((error) => { console.log(error) });
+        request.post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/user').send(user).end();
     }
 
     // 微信菜单页面定制化链接分享
