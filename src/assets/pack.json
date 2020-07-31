@@ -51,6 +51,11 @@
                 "type": "image",
                 "key": "batman",
                 "url": "assets/images/batman.png"
+            },
+            {
+                "type": "image",
+                "key": "trophy",
+                "url": "assets/images/trophy.png"
             }
         ]
     }

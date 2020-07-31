@@ -1,8 +1,14 @@
 export class OverScene extends Phaser.Scene {
 
-    private restart_button: Phaser.GameObjects.Image;
+    private replay_button: Phaser.GameObjects.BitmapText;
+    private board_button: Phaser.GameObjects.BitmapText;
+    private share_button: Phaser.GameObjects.BitmapText;
+    private score_text: Phaser.GameObjects.BitmapText;
+    private rank_text: Phaser.GameObjects.BitmapText;
     
     private score: number;
+    private rank: number = 100;
+    private count: number = 1000;
 
     constructor() {
         super({ key: 'OverScene' })
@@ -14,13 +20,32 @@ export class OverScene extends Phaser.Scene {
 
     create(): void {
         this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
-        this.add.bitmapText(185, 240, 'gem', 'GAME\nOVER', 136);
-        this.add.bitmapText(480, 10, 'gem', 'Score:' + this.score, 32)
 
-        this.restart_button = this.add.image(320, 640, 'start-button').setInteractive();
-        this.restart_button.on('pointerup', () => {
+        this.add.image(320, 180, 'trophy');
+        this.score_text = this.add.bitmapText(0, 360, 'gem', 'Score: ' + this.score, 36, 1);
+        this.score_text.setX((640 - this.score_text.width) / 2);
+        this.rank_text = this.add.bitmapText(0, 400, 'gem', 'Rank: ' + this.rank + '/' + this.count, 24, 1);
+        this.rank_text.setX((640 - this.rank_text.width) / 2);
+
+        this.replay_button = this.add.bitmapText(320, 560, 'gem', 'Replay', 48);
+
+        console.log((640 - this.replay_button.width) / 2)
+        this.replay_button.setX((640 - this.replay_button.width) / 2).setDisplayOrigin(0.5, 0.5)
+        this.replay_button.setInteractive();
+        this.replay_button.on('pointerup', () => {
             this.scene.start("GameScene");
         });
-        this.tweens.add({ targets: this.restart_button, repeat: -1, props: { scale: { value: 1.1, ease: 'Power3' } } });
+
+        this.board_button = this.add.bitmapText(320, 620, 'gem', 'Board', 48);
+        this.board_button.setX((640 - this.board_button.width) / 2).setDisplayOrigin(0.5, 0.5)
+        this.board_button.setInteractive();
+        this.board_button.on('pointerup', () => {
+        });
+
+        this.share_button = this.add.bitmapText(320, 680, 'gem', 'Share', 48);
+        this.share_button.setX((640 - this.share_button.width) / 2).setDisplayOrigin(0.5, 0.5)
+        this.share_button.setInteractive();
+        this.share_button.on('pointerup', () => {
+        });
     }
 }
