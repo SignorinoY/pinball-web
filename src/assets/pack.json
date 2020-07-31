@@ -56,6 +56,16 @@
                 "type": "image",
                 "key": "trophy",
                 "url": "assets/images/trophy.png"
+            },
+            {
+                "type": "image",
+                "key": "QR-Code",
+                "url": "assets/images/QRCode.png"
+            },
+            {
+                "type": "image",
+                "key": "default",
+                "url": "assets/images/default.jpg"
             }
         ]
     }

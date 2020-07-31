@@ -9,6 +9,7 @@ import { BootScene } from './scenes/BootScene'
 import { MainScene } from './scenes/MainScene'
 import { GameScene } from './scenes/GameScene'
 import { OverScene } from './scenes/OverScene';
+import { ShareScene } from './scenes/ShareScene';
 
 if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
 
@@ -39,7 +40,7 @@ if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
     // 微信菜单页面定制化链接分享
     request
         .get('https://xwfintech.qingke.io/wxapi/cgi-bin/token')
-        .end(function (error, result) {
+        .end((error, result) => {
             const appId = 'wx0703b2844c4a2143';
             const jsapi_ticket = result.body['ticket'];
             const timestamp = Math.round(new Date().getTime() / 1000);
@@ -55,7 +56,7 @@ if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
                 signature: signature,
                 jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ']
             });
-            wx.ready(function () {
+            wx.ready(() => {
                 const share_title = '新网银行金融科技挑战赛·Pinball By SignorinoY';
                 const share_desc = '朱望仔大战大反派，快来打榜挑战吧~😀';
                 const share_link = 'https://xwfintech.qingke.io/5ef21525813260002d508321/';
@@ -88,7 +89,7 @@ if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
                     cancel: () => { }
                 });
             });
-        })
+        });
 }
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -100,7 +101,7 @@ const config: Phaser.Types.Core.GameConfig = {
         width: 640,
         height: 960
     },
-    scene: [BootScene, MainScene, GameScene, OverScene],
+    scene: [BootScene, MainScene, GameScene, OverScene, ShareScene],
     physics: {
         default: 'matter',
         matter: {

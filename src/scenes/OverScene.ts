@@ -45,6 +45,7 @@ export class OverScene extends Phaser.Scene {
         this.share_button.setX((640 - this.share_button.width) / 2).setDisplayOrigin(0.5, 0.5)
         this.share_button.setInteractive();
         this.share_button.on('pointerup', () => {
+            this.scene.start("ShareScene", { score: this.score, rank: this.rank , count: this.count});
         });
     }
 }
