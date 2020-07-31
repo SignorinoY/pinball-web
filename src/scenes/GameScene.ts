@@ -15,7 +15,7 @@ export class GameScene extends Phaser.Scene {
     private obstacles: Array<Obstacle> = [];
     private enemies: Array<Enemy> = [];
 
-    private score: number = 0;
+    private score: number;
     private chance: number;
 
     constructor() {
@@ -25,6 +25,7 @@ export class GameScene extends Phaser.Scene {
     create(): void {
         this.matter.world.setBounds(0, 50, 640, 910);
 
+        this.score = 0;
         this.chance = 5;
 
         this.background = this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
