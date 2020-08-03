@@ -18,6 +18,7 @@
         "cookiejs": "^1.0.26",
         "crypto-js": "^4.0.0",
         "phaser": "^3.24.1",
+        "phaser3-rex-plugins": "^1.1.21",
         "superagent": "^5.3.1",
         "weixin-jsapi": "^1.1.0"
     },
