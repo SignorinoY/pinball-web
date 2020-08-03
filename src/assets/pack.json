@@ -64,8 +64,8 @@
             },
             {
                 "type": "image",
-                "key": "default",
-                "url": "assets/images/default.jpg"
+                "key": "avatar-default",
+                "url": "assets/images/avatar_default.png"
             }
         ]
     }

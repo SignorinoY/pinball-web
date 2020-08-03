@@ -47,6 +47,8 @@ export class ShareScene extends Phaser.Scene {
 
     create(): void {
 
+        this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
+
         const openid = cookie.get('openid') as unknown;
 
         var scene = this;
@@ -54,7 +56,7 @@ export class ShareScene extends Phaser.Scene {
             request
                 .get('https://xwfintech.qingke.io/5ef21525813260002d508321/api/user/' + openid)
                 .end((error, result) => {
-                    var canvas = new Canvas(this, 200, 200, 100, 100);
+                    var canvas = new Canvas(this, 220, 520, 100, 100);
                     ConvertAvatar2Base64(
                         result.body.headimgurl,
                         (base64) => {
@@ -66,10 +68,9 @@ export class ShareScene extends Phaser.Scene {
                     scene.avatar = scene.add.existing(canvas);
                 });
         } else {
-            this.avatar = this.add.image(200, 200, 'default');
+            this.avatar = this.add.image(220, 520, 'avatar-default');
         }
 
-        this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
 
         this.add.image(320, 240, 'title');
 
