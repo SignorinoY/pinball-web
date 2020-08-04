@@ -9,6 +9,7 @@ import { BootScene } from './scenes/BootScene'
 import { MainScene } from './scenes/MainScene'
 import { GameScene } from './scenes/GameScene'
 import { OverScene } from './scenes/OverScene';
+import { BoardScene } from './scenes/BoardScene';
 import { ShareScene } from './scenes/ShareScene';
 
 if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
@@ -101,7 +102,7 @@ const config: Phaser.Types.Core.GameConfig = {
         width: 640,
         height: 960
     },
-    scene: [BootScene, MainScene, GameScene, OverScene, ShareScene],
+    scene: [BootScene, MainScene, GameScene, OverScene, BoardScene, ShareScene],
     physics: {
         default: 'matter',
         matter: {

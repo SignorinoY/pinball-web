@@ -39,6 +39,7 @@ export class OverScene extends Phaser.Scene {
         this.board_button.setX((640 - this.board_button.width) / 2).setDisplayOrigin(0.5, 0.5)
         this.board_button.setInteractive();
         this.board_button.on('pointerup', () => {
+            this.scene.start("BoardScene");
         });
 
         this.share_button = this.add.bitmapText(320, 680, 'gem', 'Share', 48);
