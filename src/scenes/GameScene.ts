@@ -75,8 +75,7 @@ export class GameScene extends Phaser.Scene {
             const openid = cookie.get('openid') as unknown;
             request
                 .post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/score')
-                .send({ 'openid': openid != false ? openid : 'Unknown', 'score': this.score })
-                .end();
+                .send({ 'openid': openid != false ? openid : 'Unknown', 'score': this.score });
             this.scene.start("OverScene", { score: this.score });
         }
     }

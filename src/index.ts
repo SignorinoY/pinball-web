@@ -1,9 +1,10 @@
+import * as request from 'superagent';
+import * as Phaser from 'phaser';
+
 import cookie from 'cookiejs';
 import wx from 'weixin-jsapi';
-import sha1 from 'crypto-js/sha1';
 
-import request = require('superagent');
-import Phaser = require('phaser');
+import sha1 = require('crypto-js/sha1');
 
 import { BootScene } from './scenes/BootScene'
 import { MainScene } from './scenes/MainScene'
@@ -12,15 +13,16 @@ import { OverScene } from './scenes/OverScene';
 import { BoardScene } from './scenes/BoardScene';
 import { ShareScene } from './scenes/ShareScene';
 
+function getUser(url) {
+    const pattern = new RegExp("[?&]user=([^&]+)", "g");
+    const matcher = pattern.exec(url);
+    const user =  matcher != null ? decodeURIComponent(matcher[1]) : null;
+    return JSON.parse(user);
+}
+
 if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
 
-    function getUser(url) {
-        var pattern = new RegExp("[?&]user\=([^&]+)", "g");
-        var matcher = pattern.exec(url);
-        return matcher != null ? decodeURIComponent(matcher[1]) : null;
-    }
-
-    const user = JSON.parse(getUser(location));
+    const user = getUser(location);
 
     if (user == null && cookie("openid") == "") {
         // 请求微信授权
@@ -35,13 +37,13 @@ if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
         // 将微信用户 openid 存入 cookie
         cookie.set("openid", user["openid"], 7);
         // 将微信用户数据存入数据库
-        request.post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/user').send(user).end();
+        request.post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/user').send(user);
     }
 
     // 微信菜单页面定制化链接分享
     request
         .get('https://xwfintech.qingke.io/wxapi/cgi-bin/token')
-        .end((error, result) => {
+        .then((result) => {
             const appId = 'wx0703b2844c4a2143';
             const jsapi_ticket = result.body['ticket'];
             const timestamp = Math.round(new Date().getTime() / 1000);
@@ -66,8 +68,8 @@ if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
                     title: share_title,
                     link: share_link,
                     imgUrl: share_banner,
-                    success: () => { },
-                    cancel: () => { }
+                    success: () => { return; },
+                    cancel: () => { return; }
                 });
                 wx.onMenuShareAppMessage({
                     title: share_title,
@@ -76,8 +78,8 @@ if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
                     imgUrl: share_banner,
                     type: '',
                     dataUrl: '',
-                    success: () => { },
-                    cancel: () => { }
+                    success: () => { return; },
+                    cancel: () => { return; }
                 });
                 wx.onMenuShareQQ({
                     title: share_title,
@@ -86,8 +88,8 @@ if (navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1) {
                     imgUrl: share_banner,
                     type: '',
                     dataUrl: '',
-                    success: () => { },
-                    cancel: () => { }
+                    success: () => { return; },
+                    cancel: () => { return; }
                 });
             });
         });
@@ -112,4 +114,4 @@ const config: Phaser.Types.Core.GameConfig = {
     },
 }
 
-const game = new Phaser.Game(config);
+new Phaser.Game(config);

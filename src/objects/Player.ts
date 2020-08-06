@@ -30,7 +30,7 @@ export class Player extends Phaser.Physics.Matter.Image {
         this.setInteractive({ draggable: true });
 
         world.scene.add.existing(this)
-        
+
     }
 
     onDragStart(): void {
@@ -43,7 +43,7 @@ export class Player extends Phaser.Physics.Matter.Image {
         this.arrow.setVisible(true);
     }
 
-    onDrag(position_x, position_y): void {
+    onDrag(position_x: number, position_y: number): void {
         const delta_x = position_x - this.x;
         const delta_y = position_y - this.y;
         const delta = Math.max(50, Math.min(150, Math.sqrt(delta_x * delta_x + delta_y * delta_y)));
@@ -52,7 +52,7 @@ export class Player extends Phaser.Physics.Matter.Image {
         this.arrow.setAngle(angle);
     }
 
-    onDragEnd(position_x, position_y): void {
+    onDragEnd(position_x: number, position_y: number): void {
         this.disk.setVisible(false);
         this.arrow.setVisible(false);
         const delta_x = position_x - this.x;

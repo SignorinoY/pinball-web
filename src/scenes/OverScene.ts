@@ -7,14 +7,14 @@ export class OverScene extends Phaser.Scene {
     private rank_text: Phaser.GameObjects.BitmapText;
     
     private score: number;
-    private rank: number = 100;
-    private count: number = 1000;
+    private rank = 100;
+    private count = 1000;
 
     constructor() {
         super({ key: 'OverScene' })
     }
 
-    init(data): void {
+    init(data: { [x: string]: number; }): void {
         this.score = data['score'];
     }
 
