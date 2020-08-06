@@ -105,7 +105,12 @@ export class BoardScene extends Phaser.Scene {
 
     create(): void {
         this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
-        addLeaderboard(this, 10)
+        addLeaderboard(this, 10);
+        this.add.bitmapText(540, 900, 'gem', 'Back', 36)
+            .setInteractive()
+            .on('pointerup', () => {
+                this.scene.start("OverScene");
+            });
     }
 
 }

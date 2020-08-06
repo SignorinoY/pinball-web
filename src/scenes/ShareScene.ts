@@ -32,7 +32,7 @@ export class ShareScene extends Phaser.Scene {
     }
 
 
-    init(data): void {
+    init(data: { [x: string]: number; }): void {
         this.score = data['score'];
         this.rank = data['rank'];
         this.count = data['count'];
@@ -53,5 +53,11 @@ export class ShareScene extends Phaser.Scene {
 
         this.add.image(320, 720, 'QR-Code');
         this.add.bitmapText(158, 840, 'gem', 'Press and hold the QR code,\n Let\'s challange together!', 24, 1);
+
+        this.add.bitmapText(540, 900, 'gem', 'Back', 36)
+            .setInteractive()
+            .on('pointerup', () => {
+                this.scene.start("OverScene");
+            });
     }
 }
