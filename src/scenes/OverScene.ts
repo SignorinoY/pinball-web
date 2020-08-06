@@ -1,14 +1,18 @@
+import * as request from 'superagent';
+
+async function addRank(scene, score) {
+    const result = await request.get('https://xwfintech.qingke.io/5ef21525813260002d508321/api/rank/' + score);
+    const rank = scene.add.bitmapText(0, 400, 'gem', 'Rank: ' + result.body.rank + '/' + result.body.count, 24, 1);
+    rank.setX((640 - rank.width) / 2);
+    scene.rank = result.body.rank;
+    scene.count = result.body.count;
+}
+
 export class OverScene extends Phaser.Scene {
 
-    private replay_button: Phaser.GameObjects.BitmapText;
-    private board_button: Phaser.GameObjects.BitmapText;
-    private share_button: Phaser.GameObjects.BitmapText;
-    private score_text: Phaser.GameObjects.BitmapText;
-    private rank_text: Phaser.GameObjects.BitmapText;
-    
     private score: number;
-    private rank = 100;
-    private count = 1000;
+    private rank: number;
+    private count: number;
 
     constructor() {
         super({ key: 'OverScene' })
@@ -22,31 +26,23 @@ export class OverScene extends Phaser.Scene {
         this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
 
         this.add.image(320, 180, 'trophy');
-        this.score_text = this.add.bitmapText(0, 360, 'gem', 'Score: ' + this.score, 36, 1);
-        this.score_text.setX((640 - this.score_text.width) / 2);
-        this.rank_text = this.add.bitmapText(0, 400, 'gem', 'Rank: ' + this.rank + '/' + this.count, 24, 1);
-        this.rank_text.setX((640 - this.rank_text.width) / 2);
+        this.add.bitmapText(221, 360, 'gem', 'Score: ' + this.score.toString().padStart(4, '0'), 36, 1);
+        addRank(this, this.score);
 
-        this.replay_button = this.add.bitmapText(320, 560, 'gem', 'Replay', 48);
-
-        this.replay_button.setX((640 - this.replay_button.width) / 2).setDisplayOrigin(0.5, 0.5)
-        this.replay_button.setInteractive();
-        this.replay_button.on('pointerup', () => {
-            this.scene.start("GameScene");
-        });
-
-        this.board_button = this.add.bitmapText(320, 620, 'gem', 'Board', 48);
-        this.board_button.setX((640 - this.board_button.width) / 2).setDisplayOrigin(0.5, 0.5)
-        this.board_button.setInteractive();
-        this.board_button.on('pointerup', () => {
-            this.scene.start("BoardScene");
-        });
-
-        this.share_button = this.add.bitmapText(320, 680, 'gem', 'Share', 48);
-        this.share_button.setX((640 - this.share_button.width) / 2).setDisplayOrigin(0.5, 0.5)
-        this.share_button.setInteractive();
-        this.share_button.on('pointerup', () => {
-            this.scene.start("ShareScene", { score: this.score, rank: this.rank , count: this.count});
-        });
+        this.add.bitmapText(248, 560, 'gem', 'Replay', 48)
+            .setInteractive()
+            .on('pointerup', () => {
+                this.scene.start("GameScene");
+            });
+        this.add.bitmapText(260, 620, 'gem', 'Board', 48)
+            .setInteractive()
+            .on('pointerup', () => {
+                this.scene.start("BoardScene");
+            });
+        this.add.bitmapText(260, 680, 'gem', 'Share', 48)
+            .setInteractive()
+            .on('pointerup', () => {
+                this.scene.start("ShareScene", { score: this.score, rank: this.rank, count: this.count });
+            });
     }
 }
