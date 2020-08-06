@@ -13,7 +13,7 @@ async function addUserInfo(scene, openid) {
         const base64 = await convertAvatar2Base64(result.body.headimgurl);
         if (base64 != '') {
             scene.add.existing(
-                new Canvas(this, 220, 520, 100, 100).loadFromURLPromise(base64)
+                new Canvas(scene, 220, 520, 100, 100).loadFromURLPromise(base64)
             );
         }
     } else {
