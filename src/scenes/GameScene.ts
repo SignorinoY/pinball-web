@@ -4,7 +4,6 @@ import { Enemy } from '../objects/Enemy';
 
 export class GameScene extends Phaser.Scene {
 
-    private background: Phaser.GameObjects.Image;
     private score_text: Phaser.GameObjects.BitmapText;
     private chance_text: Phaser.GameObjects.BitmapText;
     private player: Player;
@@ -24,7 +23,7 @@ export class GameScene extends Phaser.Scene {
         this.score = 0;
         this.chance = 5;
 
-        this.background = this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
+        this.add.image(0, 0, 'background').setOrigin(0, 0).setDisplaySize(640, 960);
         this.score_text = this.add.bitmapText(480, 10, 'gem', 'Score:' + this.score, 32)
         this.chance_text = this.add.bitmapText(320, 10, 'gem', 'Chance:' + this.chance, 32)
 
