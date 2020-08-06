@@ -9,7 +9,12 @@
     "author": "SignorinoY",
     "license": "MIT",
     "devDependencies": {
+        "@types/crypto-js": "^3.1.47",
+        "@types/superagent": "^4.1.8",
+        "@typescript-eslint/eslint-plugin": "^3.8.0",
+        "@typescript-eslint/parser": "^3.8.0",
         "cssnano": "^4.1.10",
+        "eslint": "^7.6.0",
         "parcel-plugin-clean-easy": "^1.0.2",
         "parcel-plugin-static-files-copy": "^2.4.3",
         "typescript": "^3.9.7"
