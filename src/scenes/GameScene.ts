@@ -1,7 +1,3 @@
-import cookie from 'cookiejs';
-
-import request = require('superagent');
-
 import { Player } from '../objects/player'
 import { Obstacle } from '../objects/Obstacle';
 import { Enemy } from '../objects/Enemy';
@@ -72,10 +68,6 @@ export class GameScene extends Phaser.Scene {
     update(): void {
         const speed = Math.sqrt(Math.pow(this.player.body.velocity.x, 2) + Math.pow(this.player.body.velocity.y, 2));
         if ((this.enemies.length == 0 || this.chance == 0) && speed <= 0.5) {
-            const openid = cookie.get('openid') as unknown;
-            request
-                .post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/score')
-                .send({ 'openid': openid != false ? openid : 'Unknown', 'score': this.score });
             this.scene.start("OverScene", { score: this.score });
         }
     }

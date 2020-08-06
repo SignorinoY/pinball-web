@@ -1,11 +1,19 @@
+import cookie from 'cookiejs';
+
 import * as request from 'superagent';
 
 async function addRank(scene, score) {
-    const result = await request.get('https://xwfintech.qingke.io/5ef21525813260002d508321/api/rank/' + score);
-    const rank = scene.add.bitmapText(0, 400, 'gem', 'Rank: ' + result.body.rank + '/' + result.body.count, 24, 1);
-    rank.setX((640 - rank.width) / 2);
-    scene.rank = result.body.rank;
-    scene.count = result.body.count;
+    const openid = cookie.get('openid') as unknown;
+    request
+        .post('https://xwfintech.qingke.io/5ef21525813260002d508321/api/score')
+        .send({ 'openid': openid != false ? openid : 'Unknown', 'score': scene.score })
+        .end(async () => {
+            const result = await request.get('https://xwfintech.qingke.io/5ef21525813260002d508321/api/rank/' + score);
+            const rank = scene.add.bitmapText(0, 400, 'gem', 'Rank: ' + result.body.rank + '/' + result.body.count, 24, 1);
+            rank.setX((640 - rank.width) / 2);
+            scene.rank = result.body.rank;
+            scene.count = result.body.count;
+        });
 }
 
 export class OverScene extends Phaser.Scene {
