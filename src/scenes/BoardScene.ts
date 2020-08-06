@@ -87,7 +87,7 @@ async function addLeaderboard(scene, count) {
                 // Set properties from item value
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
                 cellContainer.getElement('id').setText(index + 1);
-                cellContainer.getElement('avatar').loadFromURLPromise(item.avatar);
+                cellContainer.getElement('avatar').loadFromURL(item.avatar);
                 cellContainer.getElement('nickname').setText(item.nickname);
                 cellContainer.getElement('score').setText(item.score);
                 return cellContainer;
